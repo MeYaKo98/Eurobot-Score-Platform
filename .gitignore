@@ -1,0 +1,2 @@
+include Client/.gitignore
+include Server/.gitignore
