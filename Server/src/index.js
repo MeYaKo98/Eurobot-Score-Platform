@@ -33,27 +33,3 @@ app.use('/finals', finalsRouter);
 server.listen(3001, () => {
 	console.log('SERVER IS RUNNING');
 });
-
-/*
-const io = new Server(server, {
-	cors: {
-		origin: 'http://localhost:3000',
-		methods: ['GET', 'POST'],
-	},
-});
-
-io.on('connection', (socket) => {
-	console.log(`user connected: ${socket.id}`);
-
-	socket.on('send_message', (data) => {
-		socket.broadcast.emit('receive_message', data);
-	});
-});
-*/
-
-/*
-io.of('/test').on('connection', (socket) => {
-	console.log(`test user connected: ${socket.id}`);
-});
-
-*/

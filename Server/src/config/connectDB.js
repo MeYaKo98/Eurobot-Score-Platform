@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const mongoDB_URI = 'mongodb://0.0.0.0:27017/testdb';
+const mongoDB_URI = 'mongodb://mongodb:27017/EurobotDB';
 
 async function connectToDatabase() {
 	try {
