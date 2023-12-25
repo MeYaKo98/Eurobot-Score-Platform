@@ -4,11 +4,12 @@ const Score = require('../models/score');
 const Round = require('../models/round');
 const Match = require('../models/match');
 const createMatch = require('../helpers/createMatch');
+const requireAuth = require('../helpers/authMiddleware');
 
 router.use(express.json());
 
-router.route('/').post(async (req, res) => {
-	console.log('post final: ', req.body);
+router.route('/').post(requireAuth(['admin']), async (req, res) => {
+	console.log(req.userId, 'post final: ', req.body);
 	//Define the list of teams that will play in this round
 	let teamList;
 	try {

@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Score = require('../models/score');
 const info = require('../config/info');
+const requireAuth = require('../helpers/authMiddleware');
 
 router.use(express.json());
 
@@ -12,8 +13,8 @@ router
 		const scores = await Score.find(req.query);
 		res.send(scores);
 	})
-	.delete(async (req, res) => {
-		console.log('delete score: ', req.body);
+	.delete(requireAuth(['admin']), async (req, res) => {
+		console.log(req.userId, 'delete score: ', req.body);
 		try {
 			//Collecting the search target from the delete request body
 			const targetData = req.body;
@@ -36,8 +37,8 @@ router
 			res.status(500).send(error);
 		}
 	})
-	.patch(async (req, res) => {
-		console.log('score patch: ', req.body);
+	.patch(requireAuth(['referee']), async (req, res) => {
+		console.log(req.userId, 'score patch: ', req.body);
 		try {
 			//Collecting the search target from the delete request body
 			const targetData = req.body.target;

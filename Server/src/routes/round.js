@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Round = require('../models/round');
+const requireAuth = require('../helpers/authMiddleware');
 
 router.use(express.json());
 
@@ -15,9 +16,9 @@ router
 			res.status(500).send(error);
 		}
 	})
-	.post(async (req, res) => {
+	.post(requireAuth(['admin']), async (req, res) => {
 		try {
-			console.log('post round: ', req.body);
+			console.log(req.userId, 'post round: ', req.body);
 			//Collecting the data from the post request body
 			const newData = req.body;
 			//Create a round instance and save it into the database
@@ -28,8 +29,8 @@ router
 			res.status(500).send(error);
 		}
 	})
-	.delete(async (req, res) => {
-		console.log('delete round: ', req.body);
+	.delete(requireAuth(['admin']), async (req, res) => {
+		console.log(req.userId, 'delete round: ', req.body);
 		try {
 			//Collecting the search target from the delete request body
 			const targetData = req.body;

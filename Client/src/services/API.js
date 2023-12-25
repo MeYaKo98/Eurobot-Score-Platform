@@ -3,6 +3,7 @@ import server from './server';
 
 const api = axios.create({
 	baseURL: server,
+	withCredentials: true,
 });
 
 async function postData(relativePath, newData) {

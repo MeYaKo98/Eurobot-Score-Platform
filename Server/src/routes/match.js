@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Match = require('../models/match');
 const createMatch = require('../helpers/createMatch');
+const requireAuth = require('../helpers/authMiddleware');
 
 router.use(express.json());
 
@@ -69,8 +70,8 @@ router
 		]);
 		res.send(matches);
 	})
-	.post(async (req, res) => {
-		console.log('post match: ', req.body);
+	.post(requireAuth(['admin']), async (req, res) => {
+		console.log(req.userId, 'post match: ', req.body);
 		try {
 			res.send(await createMatch(req.body));
 		} catch (error) {
@@ -78,8 +79,8 @@ router
 			res.status(500).send(error);
 		}
 	})
-	.delete(async (req, res) => {
-		console.log('delete match: ', req.body);
+	.delete(requireAuth(['admin']), async (req, res) => {
+		console.log(req.userId, 'delete match: ', req.body);
 		try {
 			//Collecting the search target from the delete request body
 			const targetData = req.body;

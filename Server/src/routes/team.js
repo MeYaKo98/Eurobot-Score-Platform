@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Team = require('../models/team');
+const requireAuth = require('../helpers/authMiddleware');
 
 router.use(express.json());
 
@@ -11,8 +12,8 @@ router
 		const teams = await Team.find(req.query).sort({ team_id: 1 });
 		res.send(teams);
 	})
-	.post(async (req, res) => {
-		console.log('post team: ', req.body);
+	.post(requireAuth(['admin']), async (req, res) => {
+		console.log(req.userId, 'post team: ', req.body);
 		try {
 			//Collecting the data from the post request body
 			const newData = req.body;
@@ -24,8 +25,8 @@ router
 			res.status(500).send(error);
 		}
 	})
-	.delete(async (req, res) => {
-		console.log('delete team: ', req.body);
+	.delete(requireAuth(['admin']), async (req, res) => {
+		console.log(req.userId, 'delete team: ', req.body);
 		try {
 			//Collecting the search target from the delete request body
 			const targetData = req.body;
@@ -36,8 +37,8 @@ router
 			res.status(500).send(error);
 		}
 	})
-	.patch(async (req, res) => {
-		console.log('patch team: ', req.body);
+	.patch(requireAuth(['admin']), async (req, res) => {
+		console.log(req.userId, 'patch team: ', req.body);
 		try {
 			//Collecting the search target from the delete request body
 			const targetData = req.body.target;

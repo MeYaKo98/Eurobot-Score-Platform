@@ -27,7 +27,18 @@ I used docker to simplify the setup process. So first docker must be installed o
 
 Once you have docker install first download or clone this repo the open you command prompt in the repo directory.
 
-First start by running this command:
+First, some environment variables must be set:
+
+1. Open the docker-compose.yml
+2. Under server set the CLIENT_URL environment variable to your your IP address (or hostname if a hostname resolution solution exists).
+
+   Example: CLIENT_URL=http://192.168.0.10 or CLIENT_URL=http://eurobot.tn
+
+   Make sure to replace the IP address or hostname with the appropriate value because the server will only accept request from the configured IP or hostname
+
+3.
+
+Now start the application run this command:
 
 ```
 docker-compose up
@@ -55,7 +66,14 @@ If you do not mind losing the database and you want to delete the containers in 
 docker-compose down
 ```
 
-Now that the platform is up and running you can set this page "your-machine-ip-adress/display" as Web display in OBS.
+Now that the platform is up and running you can set this page "your-machine-ip-address/display" as Web display in OBS.
+
+## Notes
+
+- The default user's username is "admin" and it's password is "admin"
+- When running the application and need to rest the computer use stop command (the down command will erase the database)
+
+## To be updated
 
 To note that this code is still missing the following feature:
 

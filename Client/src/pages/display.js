@@ -5,6 +5,7 @@ import io from 'socket.io-client';
 import CurrentMatch from '../components/display/currentMatch';
 import MatchScore from '../components/display/matchScore';
 import RoundResults from '../components/display/roundResults';
+import FinalRoundResults from '../components/display/finalRoundResults';
 
 import MatchAPI from '../services/match';
 import ScoreAPI from '../services/score';
@@ -33,6 +34,10 @@ function Display() {
 			if (round_id[0] === 'R') {
 				ScoreAPI.up2round(round_id.slice(1)).then((data) => {
 					setCurrent(<RoundResults roundResults={data} />);
+				});
+			} else if (round_id[0] === 'F') {
+				MatchAPI.results(null, round_id).then((data) => {
+					setCurrent(<FinalRoundResults finalRoundResults={data} />);
 				});
 			}
 		});
