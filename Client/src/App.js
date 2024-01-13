@@ -54,7 +54,7 @@ function App() {
 			</Route>
 			{linkList.map((link) => (
 				<Route
-					element={<RequireAuth allowedRoles={link.requiredRole} />}
+					element={<RequireAuth allowedRole={link.requiredRole} />}
 					key={link.btnContent + '_route_auth'}
 				>
 					<Route
