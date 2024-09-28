@@ -29,6 +29,7 @@ router
 				},
 				$set: {
 					doneTasks: [],
+					notEstimatedDoneTasks: [],
 					score_status: false,
 				},
 			});
@@ -48,13 +49,18 @@ router
 			if (
 				!updateData ||
 				!updateData.hasOwnProperty('doneTasks') ||
+				!updateData.hasOwnProperty('notEstimatedDoneTasks') ||
 				!updateData.hasOwnProperty('estimation') ||
 				!updateData.hasOwnProperty('penality')
 			) {
 				throw new Error('Missing properties in updateData.');
 			}
 
-			if (updateData.doneTasks.length != info.taskList.length) {
+			if (
+				updateData.doneTasks.length != info.taskList.length ||
+				updateData.notEstimatedDoneTasks.length !=
+					info.notEstimatedTaskList.length
+			) {
 				throw new Error('Evaluation length not matching');
 			}
 
@@ -65,13 +71,24 @@ router
 			}
 
 			//Calculate the estimation bonus
-			updateData.bonus = info.estimationBonus(
+			updateData.bonus = Math.min(
 				updateData.total,
-				updateData.estimation
+				Math.ceil(20 - Math.abs(updateData.total - updateData.estimation) / 2)
 			);
+
+			updateData.finalTotal = 0;
+			for (let i = 0; i < updateData.notEstimatedDoneTasks.length; i++) {
+				updateData.finalTotal +=
+					updateData.notEstimatedDoneTasks[i] *
+					info.notEstimatedTaskList[i].score;
+			}
+
 			//Calculate the final score
 			updateData.finalTotal = Math.max(
-				updateData.total + updateData.bonus - updateData.penality,
+				updateData.finalTotal +
+					updateData.total +
+					updateData.bonus -
+					updateData.penality,
 				0
 			);
 

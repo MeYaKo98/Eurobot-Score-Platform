@@ -29,7 +29,8 @@ async function updateScore(
 	team_id,
 	doneTasks,
 	estimation,
-	penality
+	penality,
+	notEstimatedDoneTasks
 ) {
 	const targetData = {
 		round_id: round_id,
@@ -40,6 +41,7 @@ async function updateScore(
 		doneTasks: doneTasks,
 		estimation: estimation,
 		penality: penality,
+		notEstimatedDoneTasks: notEstimatedDoneTasks,
 		score_status: true,
 	};
 	const response = await API.patch('/score', targetData, updateData);

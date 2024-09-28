@@ -12,9 +12,15 @@ async function getColors() {
 	return response;
 }
 
+async function getInfo() {
+	const response = await API.get('/info');
+	return response;
+}
+
 const Info = {
 	getTasks: getTasks,
 	getColors: getColors,
+	getInfo: getInfo,
 };
 
 export default Info;

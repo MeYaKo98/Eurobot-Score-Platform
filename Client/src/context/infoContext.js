@@ -12,18 +12,21 @@ export function useInfo() {
 //context wrapper
 export function InfoProvider({ children }) {
 	//define the the context value state
-	const [info, setInfo] = useState({ colors: {}, tasks: [] });
+	const [info, setInfo] = useState({
+		colors: {},
+		tasks: [],
+		notEstimatedTasks: [],
+	});
 
 	//collect the info data on creation
 	useEffect(() => {
-		const colorsPromise = infoAPI.getColors();
-		const tasksPromise = infoAPI.getTasks();
-
-		Promise.all([colorsPromise, tasksPromise])
-			.then(([colorsData, tasksData]) => {
+		infoAPI
+			.getInfo()
+			.then((response) => {
 				const combinedData = {
-					colors: colorsData,
-					tasks: tasksData,
+					colors: response.primaryColors,
+					tasks: response.taskList,
+					notEstimatedTasks: response.notEstimatedTaskList,
 				};
 				setInfo(combinedData);
 			})

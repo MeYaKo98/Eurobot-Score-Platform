@@ -14,4 +14,9 @@ router.route('/primaryColors').get(async (req, res) => {
 	res.send(info.primaryColors);
 });
 
+router.route('/').get(async (req, res) => {
+	console.log('get info');
+	res.send(info);
+});
+
 module.exports = router;

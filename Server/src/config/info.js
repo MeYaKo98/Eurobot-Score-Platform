@@ -1,40 +1,58 @@
 //Here we define the principal colors for each team
 primaryColors = {
-	team1: '#ffffff',
-	team2: '#e0e0e0',
+	team1: '#CBA846',
+	team2: '#477792',
 };
 
 //Here we define the tasks list
 taskList = [
 	{
-		name: 'Gateau Valide',
+		name: 'Plant valid in zone',
+		type: 'N',
+		score: 3,
+	},
+	{
+		name: 'Plant in pot ',
+		type: 'N',
+		score: 1,
+	},
+	{
+		name: 'Valid plant in planter',
+		type: 'N',
+		score: 1,
+	},
+	{
+		name: 'Solar panel',
 		type: 'N',
 		score: 5,
 	},
 	{
-		name: 'Cerise dans paneau',
+		name: 'Lady Bugs in zone occupied',
 		type: 'N',
-		score: 7,
+		score: 5,
 	},
 	{
-		name: 'Estimation cerise correcte',
-		type: 'B',
-		score: 1,
+		name: 'Lady Bugs in contact',
+		type: 'N',
+		score: 5,
 	},
 	{
-		name: 'Combinaison Magique',
+		name: 'Robot in final zone',
 		type: 'B',
-		score: 2,
+		score: 10,
 	},
 ];
 
+notEstimatedTaskList = [];
+
 //Here we define the function that calculate the estimation score bonus
 function estimationBonus(score, estimation) {
-	return Math.max(0, 20 - Math.abs(score - estimation));
+	return Math.max(0, Math.ceil(20 - Math.abs(score - estimation) / 2));
 }
 
 module.exports = {
 	primaryColors,
 	taskList,
+	notEstimatedTaskList,
 	estimationBonus,
 };

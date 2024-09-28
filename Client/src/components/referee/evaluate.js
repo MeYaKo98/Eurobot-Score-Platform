@@ -12,6 +12,7 @@ function Evaluate() {
 	const score_info = useParams();
 
 	const taskList = useInfo().tasks;
+	const notEstimatedTaskList = useInfo().notEstimatedTasks;
 
 	const [teamName, setTeamName] = useState();
 	const [roundName, setRoundName] = useState();
@@ -51,6 +52,20 @@ function Evaluate() {
 			}
 			return NaN;
 		});
+		let notEstimatedDoneTasks = [];
+		notEstimatedTaskList.map((task, index) => {
+			if (task.type === 'N') {
+				notEstimatedDoneTasks = [
+					...notEstimatedDoneTasks,
+					Number(formData.get(`NotEstimatedTask_${index}`)),
+				];
+			} else if (formData.get(`NotEstimatedTask_${index}`)) {
+				notEstimatedDoneTasks = [...notEstimatedDoneTasks, 1];
+			} else {
+				notEstimatedDoneTasks = [...notEstimatedDoneTasks, 0];
+			}
+			return NaN;
+		});
 		const estimation = formData.get('estimation');
 		const penality = formData.get('penality');
 		//send data to the db
@@ -60,7 +75,8 @@ function Evaluate() {
 			score.team_id,
 			doneTasks,
 			estimation,
-			penality
+			penality,
+			notEstimatedDoneTasks
 		).then((data) => {
 			if (data.matchedCount > 0) {
 				navigation(`/referee/${score_info.referee_id}`);
@@ -175,7 +191,46 @@ function Evaluate() {
 								/>
 							</td>
 						</tr>
-
+						{notEstimatedTaskList.map((task, index) => (
+							<tr key={`NotEstimatedTask_${index}`}>
+								<td className='align-middle'>
+									{task.name}
+									<Form.Control style={{ display: 'none' }} />
+								</td>
+								<td className='text-center align-middle'>{task.score}</td>
+								<td className='text-center'>
+									{task.type === 'N' ? (
+										<Form.Control
+											type='number'
+											step='1'
+											placeholder='Repetition'
+											size='sm'
+											min='0'
+											className='text-center'
+											defaultValue={
+												score && score.notEstimatedDoneTasks.length
+													? `${score.notEstimatedDoneTasks[index]}`
+													: ''
+											}
+											name={`NotEstimatedTask_${index}`}
+										/>
+									) : (
+										<Form.Check
+											inline
+											label='Done'
+											type='checkbox'
+											className='m-0'
+											defaultChecked={
+												score &&
+												score.notEstimatedDoneTasks.length &&
+												Number(score.notEstimatedDoneTasks[index])
+											}
+											name={`NotEstimatedTask_${index}`}
+										/>
+									)}
+								</td>
+							</tr>
+						))}
 						<tr>
 							<td />
 							<td />

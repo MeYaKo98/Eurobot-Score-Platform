@@ -4,6 +4,7 @@ import { useInfo } from '../../context/infoContext';
 
 function DetailedScore({ onHide, DetailedScore }) {
 	const taskList = useInfo().tasks;
+	const notEstimatedTaskList = useInfo().notEstimatedTasks;
 	return (
 		<Modal
 			show={DetailedScore ? true : false}
@@ -54,7 +55,7 @@ function DetailedScore({ onHide, DetailedScore }) {
 							</td>
 						</tr>
 						<tr>
-							<td className='align-middle'>Score Estimation</td>
+							<td className='align-middle'>Estimated Score</td>
 							<td className='text-center align-middle'>
 								{DetailedScore?.score1?.estimation
 									? `${DetailedScore.score1.estimation}`
@@ -63,6 +64,19 @@ function DetailedScore({ onHide, DetailedScore }) {
 							<td className='text-center align-middle'>
 								{DetailedScore?.score2?.estimation
 									? `${DetailedScore.score2.estimation}`
+									: '0'}
+							</td>
+						</tr>
+						<tr>
+							<td className='align-middle'>Estimation Bonus</td>
+							<td className='text-center align-middle'>
+								{DetailedScore?.score1?.bonus
+									? `${DetailedScore.score1.bonus}`
+									: '0'}
+							</td>
+							<td className='text-center align-middle'>
+								{DetailedScore?.score2?.bonus
+									? `${DetailedScore.score2.bonus}`
 									: '0'}
 							</td>
 						</tr>
@@ -79,6 +93,28 @@ function DetailedScore({ onHide, DetailedScore }) {
 									: '0'}
 							</td>
 						</tr>
+						{notEstimatedTaskList.map((task, index) => (
+							<tr
+								style={
+									index === 0
+										? { borderTopColor: '#000000', borderTopWidth: 2 }
+										: {}
+								}
+								key={`notEstimatedTask_${index}`}
+							>
+								<td className='align-middle'>{task.name}</td>
+								<td className='text-center align-middle'>
+									{DetailedScore?.score1?.notEstimatedDoneTasks.length
+										? `${DetailedScore.score1.notEstimatedDoneTasks[index]}`
+										: '0'}
+								</td>
+								<td className='text-center align-middle'>
+									{DetailedScore?.score2?.notEstimatedDoneTasks.length
+										? `${DetailedScore.score2.notEstimatedDoneTasks[index]}`
+										: '0'}
+								</td>
+							</tr>
+						))}
 						<tr style={{ borderTopColor: '#000000', borderTopWidth: 2 }}>
 							<td className='align-middle'>Total</td>
 							<td className='text-center align-middle'>

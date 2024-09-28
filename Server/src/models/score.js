@@ -20,6 +20,7 @@ const scoreSchema = mongoose.Schema({
 		default: false,
 	},
 	doneTasks: [Number],
+	notEstimatedDoneTasks: [Number],
 	total: Number,
 	estimation: Number,
 	bonus: Number,
