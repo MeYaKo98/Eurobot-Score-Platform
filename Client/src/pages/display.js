@@ -44,7 +44,7 @@ function Display() {
 	}, []);
 
 	return (
-		<div style={{ height: '100vh', width: '100vw', backgroundColor: 'white' }}>
+		<div style={{ height: '100vh', width: '100vw', backgroundColor: 'none' }}>
 			{current}
 		</div>
 	);
