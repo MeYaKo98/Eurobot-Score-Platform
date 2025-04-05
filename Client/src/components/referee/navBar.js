@@ -3,13 +3,16 @@ import { useNavigate, useParams, NavLink } from 'react-router-dom';
 
 import { ButtonGroup, Navbar, ToggleButton } from 'react-bootstrap';
 
+import { useInfo } from '../../context/infoContext';
+
 function NavigationBar() {
 	const link = useParams()['*'];
 	const navigate = useNavigate();
+	const colors = useInfo().colors;
 
 	const navLinks = [
-		{ linkContent: 'Team 1', link: '1' },
-		{ linkContent: 'Team 2', link: '2' },
+		{ linkContent: 'Team 1', link: '1', color: colors.team1 },
+		{ linkContent: 'Team 2', link: '2', color: colors.team2 },
 	];
 	return (
 		<Navbar
@@ -30,7 +33,7 @@ function NavigationBar() {
 							<ToggleButton
 								type='radio'
 								checked={link === navLink.link}
-								variant='primary'
+								variant='link'
 								key={navLink.linkContent + '_navLink'}
 								as={NavLink}
 								to={`${navLink.link}`}
@@ -38,6 +41,11 @@ function NavigationBar() {
 								onClick={() => {
 									navigate(`${navLink.link}`);
 								}}
+								style={{
+									backgroundColor: navLink.color,
+									color: 'white',
+    								textDecoration: 'none'
+								 }}
 							>
 								{navLink.linkContent}
 							</ToggleButton>

@@ -3,7 +3,7 @@ const User = require('../models/user');
 const bcrypt = require('bcrypt');
 
 const mongoDB_URI =
-	process.env.DB_CONNECTION_STRING || 'mongodb://mongodb:27017/EurobotDB';
+	process.env.DB_CONNECTION_STRING || 'mongodb://localhost:27017/EurobotDB';
 
 async function connectToDatabase() {
 	try {
