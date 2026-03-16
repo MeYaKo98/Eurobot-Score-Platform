@@ -27,6 +27,7 @@ export function InfoProvider({ children }) {
 					colors: response.primaryColors,
 					tasks: response.taskList,
 					notEstimatedTasks: response.notEstimatedTaskList,
+					isEstimationActive: response.isEstimationActive,
 				};
 				setInfo(combinedData);
 			})

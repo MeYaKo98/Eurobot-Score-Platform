@@ -13,6 +13,7 @@ function Evaluate() {
 
 	const taskList = useInfo().tasks;
 	const notEstimatedTaskList = useInfo().notEstimatedTasks;
+	const isEstimationActive = useInfo().isEstimationActive;
 
 	const [teamName, setTeamName] = useState();
 	const [roundName, setRoundName] = useState();
@@ -66,7 +67,7 @@ function Evaluate() {
 			}
 			return NaN;
 		});
-		const estimation = formData.get('estimation');
+		const estimation = 0;//formData.get('estimation');
 		const penality = formData.get('penality');
 		//send data to the db
 		ScoreAPI.update(
@@ -151,6 +152,7 @@ function Evaluate() {
 								</td>
 							</tr>
 						))}
+						{ !!isEstimationActive && (<>
 						<tr>
 							<td className='align-middle'>Score Estimation</td>
 							<td className='text-center align-middle'> N/A </td>
@@ -171,6 +173,7 @@ function Evaluate() {
 								/>
 							</td>
 						</tr>
+						</>)}
 						<tr>
 							<td className='align-middle'>Penality</td>
 							<td className='text-center align-middle'> N/A </td>

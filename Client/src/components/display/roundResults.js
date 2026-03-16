@@ -47,7 +47,7 @@ function RoundResults({ roundResults }) {
 	return (
 		<div className='roundDisplay'>
 			<div className='background fade'>
-				<div className='header'>Cumulative Score Eurobot 2024</div>
+				<div className='header'>Cumulative Score Eurobot 2026</div>
 				<div className='scoreTable'>
 					<table className='table'>
 						{diplayedTeams.map((team, index) => (

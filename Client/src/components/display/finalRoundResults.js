@@ -8,7 +8,7 @@ function FinalRoundResults({ finalRoundResults }) {
 		<div className='finalDisplay'>
 			<div className='background fade'>
 				<div className='header'>
-					{finalRoundResults && finalRoundResults[0].round_name} Eurobot 2024
+					{finalRoundResults && finalRoundResults[0].round_name} Eurobot 2026
 				</div>
 				<div className='scoreTable'>
 					<table className='table'>

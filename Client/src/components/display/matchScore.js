@@ -5,11 +5,12 @@ function MatchScore({ matchResults }) {
 	const colors = useInfo().colors;
 	const taskList = useInfo().tasks;
 	const notEstimatedTaskList = useInfo().notEstimatedTasks;
+	const isEstimationActive = useInfo().isEstimationActive
 
 	return (
 		<div className='score'>
 			<div className='background fade'>
-				<div className='header'>{matchResults.round_name} Eurobot 2024</div>
+				<div className='header'>{matchResults.round_name} Eurobot 2026</div>
 				<div className='teams'>
 					Team 1:
 					<span
@@ -83,6 +84,7 @@ function MatchScore({ matchResults }) {
 									: '0'}
 							</td>
 						</tr>
+						{!!isEstimationActive && (<>
 						<tr className='scoreRow'>
 							<td className='align-middle ps-3'>Estimated Score</td>
 							<td
@@ -129,6 +131,7 @@ function MatchScore({ matchResults }) {
 									: '0'}
 							</td>
 						</tr>
+						</>)}
 						<tr className='scoreRow'>
 							<td className='align-middle ps-3'>Penality</td>
 							<td

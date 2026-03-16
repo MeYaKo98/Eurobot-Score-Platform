@@ -45,14 +45,17 @@ taskList = [
 
 notEstimatedTaskList = [];
 
+const isEstimationActive = 0;
+
 //Here we define the function that calculate the estimation score bonus
-function estimationBonus(score, estimation) {
-	return Math.max(0, Math.ceil(20 - Math.abs(score - estimation) / 2));
+function estimationBonus(total, estimation) {
+	return Math.min(total, Math.ceil(20 - Math.abs(total - estimation) / 2));
 }
 
 module.exports = {
 	primaryColors,
 	taskList,
 	notEstimatedTaskList,
+	isEstimationActive,
 	estimationBonus,
 };

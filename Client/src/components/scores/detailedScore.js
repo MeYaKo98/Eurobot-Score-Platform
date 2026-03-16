@@ -5,6 +5,7 @@ import { useInfo } from '../../context/infoContext';
 function DetailedScore({ onHide, DetailedScore }) {
 	const taskList = useInfo().tasks;
 	const notEstimatedTaskList = useInfo().notEstimatedTasks;
+	const isEstimationActive = useInfo().isEstimationActive;
 	return (
 		<Modal
 			show={DetailedScore ? true : false}
@@ -54,6 +55,7 @@ function DetailedScore({ onHide, DetailedScore }) {
 									: '0'}
 							</td>
 						</tr>
+						{ !!isEstimationActive && (<>
 						<tr>
 							<td className='align-middle'>Estimated Score</td>
 							<td className='text-center align-middle'>
@@ -80,6 +82,7 @@ function DetailedScore({ onHide, DetailedScore }) {
 									: '0'}
 							</td>
 						</tr>
+						</>)}
 						<tr>
 							<td className='align-middle'>Penality</td>
 							<td className='text-center align-middle'>

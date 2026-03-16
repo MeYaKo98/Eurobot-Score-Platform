@@ -70,11 +70,12 @@ router
 				updateData.total += updateData.doneTasks[i] * info.taskList[i].score;
 			}
 
-			//Calculate the estimation bonus
-			updateData.bonus = Math.min(
-				updateData.total,
-				Math.ceil(20 - Math.abs(updateData.total - updateData.estimation) / 2)
-			);
+			if (info.isEstimationActive) {
+				updateData.bonus = info.estimationBonus(updateData.total, updateData.estimation);
+			}
+			else {
+				updateData.bonus = 0;
+			}
 
 			updateData.finalTotal = 0;
 			for (let i = 0; i < updateData.notEstimatedDoneTasks.length; i++) {

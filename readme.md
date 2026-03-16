@@ -19,7 +19,7 @@ The file “info.js” under “Server/src/config” contain the tasks list. Eve
 }
 ```
 
-This file also contains the score estimation formula to be adjusted and the primary teams' colors for this edition.
+This file also contains the score estimation formula to be adjusted (there is also a parameter to activate or not the estimation) and the primary teams' colors for this edition.
 
 ## Setup
 
@@ -77,5 +77,4 @@ Now that the platform is up and running you can set this page "your-machine-ip-a
 
 To note that this code is still missing the following feature:
 
-- The design of the different displays for live stream (the different required component exists but they only display the raw data)
 - The restart button is not functional in the dashboard (did not want to force a certain behavior)
