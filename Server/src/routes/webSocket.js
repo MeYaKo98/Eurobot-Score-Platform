@@ -25,6 +25,22 @@ function initWebSocket(server) {
 			socket.broadcast.emit('roundResults', msg);
 		});
 
+		socket.on('showRoundMatches', (msg) => {
+			socket.broadcast.emit('showRoundMatches', msg);
+		});
+
+		socket.on('setTimer', (msg) => {
+			socket.broadcast.emit('setTimer', msg);
+		});
+
+		socket.on('clearTimer', (msg) => {
+			socket.broadcast.emit('clearTimer', msg);
+		});
+
+		socket.on('showMatchBanner', (msg) => {
+			socket.broadcast.emit('showMatchBanner', msg);
+		});
+
 		socket.on('disconnect', () => {
 			socket.broadcast.emit('A user disconnected');
 		});

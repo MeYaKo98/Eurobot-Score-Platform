@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react';
 import server from '../services/server';
 import io from 'socket.io-client';
 
+import Timer from '../components/display/timer';
+import ShowRoundMatches from '../components/display/showRoundMatches';
+import CurrentMatchBanner from '../components/display/currentMatchBanner';
+
 import CurrentMatch from '../components/display/currentMatch';
 import MatchScore from '../components/display/matchScore';
 import RoundResults from '../components/display/roundResults';
@@ -40,6 +44,28 @@ function Display() {
 					setCurrent(<FinalRoundResults finalRoundResults={data} />);
 				});
 			}
+		});
+
+		socket.on('showRoundMatches', (round_id) => {
+			MatchAPI.get(round_id).then((data) => {
+				console.log("Data received from the backend:", data);
+				setCurrent(<ShowRoundMatches matchList={data} />);
+			});
+		});
+
+		socket.on('setTimer', (timer) => {
+			console.log("received timer from the backend: ", timer);
+			setCurrent(<Timer timer={parseInt(timer)} />);
+		});
+
+		socket.on('clearTimer', () => {
+			setCurrent();
+		});
+
+		socket.on('showMatchBanner', (match_info) => {
+			MatchAPI.get(match_info.round_id, match_info.match_id).then((data) => {
+				setCurrent(<CurrentMatchBanner matchInfo={data[0]} />);
+			});
 		});
 	}, []);
 

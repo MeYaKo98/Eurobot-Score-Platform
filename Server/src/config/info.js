@@ -1,7 +1,12 @@
 //Here we define the principal colors for each team
-primaryColors = {
+/*primaryColors = {
 	team1: '#CBA846',
 	team2: '#477792',
+};*/
+
+primaryColors = {
+	team1: '#f7b500',
+	team2: '#005b8c',
 };
 
 //Here we define the tasks list

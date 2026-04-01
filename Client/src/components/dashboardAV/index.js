@@ -1,9 +1,16 @@
 import { useState, useEffect } from 'react';
-import { Container } from 'react-bootstrap';
+import { Container, Button, Form } from 'react-bootstrap';
 import RoundAPI from '../../services/round';
 import Round from './round';
 
+import io from 'socket.io-client';
+import server from '../../services/server';
+
 function Index() {
+	const socket = io(server);
+
+	const [minutes, setMinutes] = useState(0);
+	const [seconds, setSeconds] = useState(0);
 	const [roundList, setRoundList] = useState([]);
 
 	useEffect(() => {
@@ -19,8 +26,34 @@ function Index() {
 			})
 			.catch((error) => console.error('Error fetching data:', error));
 	}, []);
+
+	const sendSetTimer = () => {
+		const timer = minutes * 60 + seconds;
+		console.log("Sending timer to the display: ", timer);
+		socket.emit('setTimer', timer);
+	};
+
+	const sendClearTimer = () => {
+		socket.emit('clearTimer');
+	};
+
 	return (
 		<Container>
+			<Form className='my-3'>
+				<Form.Group className="mb-3">
+					<Form.Label>Minutes:</Form.Label>
+					<Form.Control type="number" value={minutes} onChange={(e) => setMinutes(parseInt(e.target.value))} />
+				</Form.Group>
+
+				<Form.Group className="mb-3">
+					<Form.Label>Seconds:</Form.Label>
+					<Form.Control type="number" value={seconds} onChange={(e) => setSeconds(parseInt(e.target.value))} />
+				</Form.Group>
+
+				<Button variant="primary" style={{ marginRight: "1rem" }} onClick={() => sendSetTimer()}>Set Timer</Button>
+				<Button variant="secondary" onClick={() => sendClearTimer()}>Clear Timer</Button>
+			</Form>
+
 			{roundList.map((round_info) => (
 				<Round
 					round_info={round_info}
