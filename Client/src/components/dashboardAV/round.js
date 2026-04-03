@@ -32,6 +32,17 @@ function Round({ round_info }) {
 		socket.emit('roundResults', round_id);
 	};
 
+	const showRoundMatches = (round_id) => {
+		socket.emit('showRoundMatches', round_id);
+	};
+
+	const showMatchBanner = (singleMatch) => {
+		socket.emit('showMatchBanner', {
+			match_id: singleMatch.match_id,
+			round_id: singleMatch.round_id,
+		});
+	};
+
 	const [matchList, setMatchList] = useState([]);
 
 	useEffect(() => {
@@ -60,6 +71,14 @@ function Round({ round_info }) {
 							variant='outline-primary'
 							size='sm'
 							className='ms-auto me-2'
+							onClick={() => showMatchBanner(singleMatch)}
+						>
+							Show match banner
+						</Button>
+						<Button
+							variant='outline-primary'
+							size='sm'
+							className='me-2'
 							onClick={() => matchResults(singleMatch)}
 						>
 							Results
@@ -95,6 +114,14 @@ function Round({ round_info }) {
 						variant='outline-primary'
 						size='sm'
 						className='ms-auto'
+						onClick={() => showRoundMatches(round_info.round_id)}
+					>
+						Show planned matches
+					</Button>
+					<Button
+						variant='outline-primary'
+						size='sm'
+						className='me-2'
 						onClick={() => roundResults(round_info.round_id)}
 					>
 						Show
