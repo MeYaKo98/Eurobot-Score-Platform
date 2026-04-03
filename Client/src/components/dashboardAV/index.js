@@ -39,20 +39,20 @@ function Index() {
 
 	return (
 		<Container>
-			<Form className='my-3'>
-				<Form.Group className="mb-3">
-					<Form.Label>Minutes:</Form.Label>
-					<Form.Control type="number" value={minutes} onChange={(e) => setMinutes(parseInt(e.target.value))} />
+			<Form className='sticky-top my-3 d-flex align-items-center flex-wrap'>
+				<Form.Group className="me-3 d-flex align-items-center">
+					<Form.Label className="mb-0 me-2">Minutes:</Form.Label>
+					<Form.Control type="number" value={minutes} onChange={(e) => setMinutes(parseInt(e.target.value))}/>
 				</Form.Group>
 
-				<Form.Group className="mb-3">
-					<Form.Label>Seconds:</Form.Label>
-					<Form.Control type="number" value={seconds} onChange={(e) => setSeconds(parseInt(e.target.value))} />
+				<Form.Group className="me-3 d-flex align-items-center">
+					<Form.Label className="mb-0 me-2">Seconds:</Form.Label>
+					<Form.Control type="number" value={seconds} onChange={(e) => setSeconds(parseInt(e.target.value))}/>
 				</Form.Group>
 
-				<Button variant="primary" style={{ marginRight: "1rem" }} onClick={() => sendSetTimer()}>Set Timer</Button>
-				<Button variant="secondary" onClick={() => sendClearTimer()}>Clear Timer</Button>
-			</Form>
+				<Button variant="primary" className="ms-auto" onClick={() => sendSetTimer()}>Set Timer</Button>
+				<Button variant="secondary" className="ms-2" onClick={() => sendClearTimer()}>Clear Timer</Button>
+			</Form>	
 
 			{roundList.map((round_info) => (
 				<Round
