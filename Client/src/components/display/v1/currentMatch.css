@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Chivo+Mono:ital,wght@1,900&display=swap');
+
+.currentMatch .font {
+	font-family: 'Chivo Mono', monospace;
+}
+
+.currentMatch .countdown {
+	color: white;
+	-webkit-text-stroke: 3px black; /* This represents the black outline */
+	font-size: 7vh;
+	font-weight: bold;
+	position: absolute;
+	bottom: 5%;
+	left: 50%; /* Position at the middle */
+	transform: translate(-50%, -100%); /* Offset the origin */
+	animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+	0% {
+		transform: scale(1);
+	}
+	50% {
+		transform: scale(1.2);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+
+.currentMatch .timer {
+	color: white;
+	-webkit-text-stroke: 3px black; /* This represents the black outline */
+	font-size: 7vh;
+	font-weight: bold;
+	position: absolute;
+	top: 5%;
+	left: 50%; /* Position at the middle */
+	transform: translate(-50%, 0); /* Offset the origin */
+}
+
+.currentMatch .teams {
+	width: 100vw;
+	position: absolute;
+	transform: translate(0, -50%); /* Offset the origin */
+	overflow: hidden;
+}
+
+.currentMatch .teamBIG {
+	height: 20vh;
+	top: 50%;
+	font-size: 7vh;
+	-webkit-text-stroke: 3px black; /* This represents the black outline */
+}
+
+.currentMatch .teamSMALL {
+	height: 10vh;
+	top: 90%;
+	font-size: 3.5vh;
+	-webkit-text-stroke: 1.5px black; /* This represents the black outline */
+	transition: all 1s ease;
+}
+
+.currentMatch .team1_container {
+	height: 100%;
+	width: 50%;
+	position: absolute;
+	left: 0;
+	animation-duration: 2s;
+	animation-iteration-count: 1;
+	animation-name: slideInFromRight;
+}
+
+@keyframes slideInFromRight {
+	0% {
+		transform: translateX(-60vw);
+	}
+
+	100% {
+		transform: translateX(0);
+	}
+}
+
+.currentMatch .team1 {
+	height: 100%;
+	width: 100%;
+	left: 0;
+	transform: skewX(-26deg);
+	position: absolute;
+}
+
+.currentMatch .team1_container_filler {
+	height: 100%;
+	aspect-ratio: 0.5;
+	position: absolute;
+	z-index: -1;
+}
+
+.currentMatch .team2_container {
+	height: 100%;
+	width: 50%;
+	position: absolute;
+	left: 50%;
+	animation-duration: 2s;
+	animation-iteration-count: 1;
+	animation-name: slideInFromLeft;
+}
+
+@keyframes slideInFromLeft {
+	0% {
+		transform: translateX(60vw);
+	}
+
+	100% {
+		transform: translateX(0);
+	}
+}
+
+.currentMatch .team2 {
+	height: 100%;
+	width: 100%;
+	transform: skewX(-26deg);
+	position: absolute;
+}
+
+.currentMatch .team2_container_filler {
+	height: 100%;
+	aspect-ratio: 0.5;
+	position: absolute;
+	z-index: -1;
+	right: 0;
+}
+
+.currentMatch .teamName {
+	color: white;
+	font-weight: bold;
+	position: absolute;
+	top: 50%;
+	left: 50%; /* Position at the middle */
+	transform: translate(-50%, -50%); /* Offset the origin */
+}

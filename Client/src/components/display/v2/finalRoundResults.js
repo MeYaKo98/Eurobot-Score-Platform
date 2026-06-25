@@ -1,4 +1,4 @@
-import { useInfo } from '../../context/infoContext';
+import { useInfo } from '../../../context/infoContext';
 import './finalRoundResults.css';
 
 function FinalRoundResults({ finalRoundResults }) {

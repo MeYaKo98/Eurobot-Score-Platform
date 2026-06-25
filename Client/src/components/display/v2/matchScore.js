@@ -1,4 +1,4 @@
-import { useInfo } from '../../context/infoContext';
+import { useInfo } from '../../../context/infoContext';
 import './matchScore.css';
 
 function MatchScore({ matchResults }) {

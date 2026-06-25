@@ -1,6 +1,6 @@
 import './showRoundMatches.css';
 import { useEffect, useState } from 'react';
-import { useInfo } from '../../context/infoContext';
+import { useInfo } from '../../../context/infoContext';
 
 const teamPerPage = 6;
 

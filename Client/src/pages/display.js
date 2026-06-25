@@ -1,24 +1,43 @@
 import React, { useState, useEffect } from 'react';
 import server from '../services/server';
 import io from 'socket.io-client';
-
-import Timer from '../components/display/timer';
-import ShowRoundMatches from '../components/display/showRoundMatches';
-import CurrentMatchBanner from '../components/display/currentMatchBanner';
-
-import CurrentMatch from '../components/display/currentMatch';
-import MatchScore from '../components/display/matchScore';
-import RoundResults from '../components/display/roundResults';
-import FinalRoundResults from '../components/display/finalRoundResults';
-
 import MatchAPI from '../services/match';
 import ScoreAPI from '../services/score';
 
+const displayVersion = process.env.REACT_APP_DISPLAY_VERSION === 'v1' ? 'v1' : 'v2';
+
+let Timer;
+let ShowRoundMatches;
+let CurrentMatchBanner;
+let CurrentMatch;
+let MatchScore;
+let RoundResults;
+let FinalRoundResults;
+
+if (displayVersion === 'v1') {
+	Timer = require('../components/display/v1/timer').default;
+	ShowRoundMatches = require('../components/display/v1/showRoundMatches').default;
+	CurrentMatchBanner = require('../components/display/v1/currentMatchBanner').default;
+	CurrentMatch = require('../components/display/v1/currentMatch').default;
+	MatchScore = require('../components/display/v1/matchScore').default;
+	RoundResults = require('../components/display/v1/roundResults').default;
+	FinalRoundResults = require('../components/display/v1/finalRoundResults').default;
+} else {
+	Timer = require('../components/display/v2/timer').default;
+	ShowRoundMatches = require('../components/display/v2/showRoundMatches').default;
+	CurrentMatchBanner = require('../components/display/v2/currentMatchBanner').default;
+	CurrentMatch = require('../components/display/v2/currentMatch').default;
+	MatchScore = require('../components/display/v2/matchScore').default;
+	RoundResults = require('../components/display/v2/roundResults').default;
+	FinalRoundResults = require('../components/display/v2/finalRoundResults').default;
+}
+
 function Display() {
 	const [current, setCurrent] = useState();
-	const socket = io(server);
 
 	useEffect(() => {
+		const socket = io(server);
+
 		socket.on('startMatch', (match_info) => {
 			MatchAPI.get(match_info.round_id, match_info.match_id).then((data) => {
 				setCurrent(<CurrentMatch matchInfo={data[0]} />);
@@ -48,13 +67,13 @@ function Display() {
 
 		socket.on('showRoundMatches', (round_id) => {
 			MatchAPI.get(round_id).then((data) => {
-				console.log("Data received from the backend:", data);
+				console.log('Data received from the backend:', data);
 				setCurrent(<ShowRoundMatches matchList={data} />);
 			});
 		});
 
 		socket.on('setTimer', (timer) => {
-			console.log("received timer from the backend: ", timer);
+			console.log('received timer from the backend: ', timer);
 			setCurrent(<Timer timer={parseInt(timer)} />);
 		});
 

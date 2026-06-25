@@ -1,5 +1,5 @@
 import './currentMatch.css';
-import { useInfo } from '../../context/infoContext';
+import { useInfo } from '../../../context/infoContext';
 
 function CurrentMatchBanner({ matchInfo }) {
 	const colors = useInfo().colors;
