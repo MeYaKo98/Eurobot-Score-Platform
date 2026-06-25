@@ -5,11 +5,31 @@ const teamPerPage = 6;
 const SUFFLE_DELAY = 2;
 
 function RoundResults({ roundResults }) {
-	const [timer, setTimer] = useState(0);
 	const [diplayedTeams, setDisplayedTeams] = useState([]);
 	const [diplayIndex, setDisplayIndex] = useState(0);
 
-	//display the list from the start
+	useEffect(() => {
+		setDisplayIndex(0);
+	}, [roundResults]);
+
+	useEffect(() => {
+		const intervalId = setInterval(() => {
+			setDisplayIndex((currentIndex) => {
+				const nextIndex = currentIndex + teamPerPage;
+
+				if (nextIndex >= roundResults.length) {
+					return currentIndex;
+				}
+
+				return nextIndex;
+			});
+		}, SUFFLE_DELAY * 1000);
+
+		return () => {
+			clearInterval(intervalId);
+		};
+	}, [roundResults]);
+
 	useEffect(() => {
 		if (diplayIndex + teamPerPage < roundResults.length) {
 			setDisplayedTeams(
@@ -18,52 +38,28 @@ function RoundResults({ roundResults }) {
 		} else {
 			setDisplayedTeams(roundResults.slice(diplayIndex));
 		}
-	}, []);
+	}, [diplayIndex, roundResults]);
 
-	//update the diplay every 2 seconds
-	useEffect(() => {
-		// Define the time-based callback using setInterval
-		const intervalId = setInterval(() => {
-			if (timer > 0 && parseInt((timer - 1) / 2) === (timer - 1) / 2)
-				if (diplayIndex < roundResults.length) {
-					if (diplayIndex + teamPerPage < roundResults.length) {
-						setDisplayedTeams(
-							roundResults.slice(diplayIndex, diplayIndex + teamPerPage)
-						);
-					} else {
-						setDisplayedTeams(roundResults.slice(diplayIndex));
-					}
-					setDisplayIndex(diplayIndex + teamPerPage);
-				}
-			setTimer(timer + 1);
-			console.log(diplayIndex, roundResults.length);
-		}, 1000);
-
-		return () => {
-			clearInterval(intervalId);
-		};
-	}, [timer]);
-
-	return (
-		<div className='roundDisplay'>
-			<div className='background fade'>
-				<div className='header'>Cumulative Score Eurobot 2026</div>
-				<div className='scoreTable'>
-					<table className='table'>
-						{diplayedTeams.map((team, index) => (
-							<tr
-								key={`team_${index}`}
-								className='scoreRow text-center'
-							>
-								<td className='align-middle scoreRow'>{team.name}</td>
-								<td className='align-center scoreColumn'>{team.totalScore}</td>
-							</tr>
-						))}
-					</table>
-				</div>
-			</div>
-		</div>
-	);
+    return (
+        <div className='leaderboard-overlay'>
+            <div className='leaderboard-card'>
+                <div className='lb-header'>Cumulative Score Eurobot 2026</div>
+                <div className='lb-list'>
+                    {diplayedTeams.map((team, index) => (
+                        <div
+                            key={`team_${team.name}_${index}`}
+                            className='lb-row'
+                            style={{ animationDelay: `${index * 0.1}s` }}
+                        >
+                            <div className='lb-rank'>#{diplayIndex + index + 1}</div>
+                            <div className='lb-team'>{team.name}</div>
+                            <div className='lb-score'>{team.totalScore}</div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </div>
+    );
 }
 
 export default RoundResults;

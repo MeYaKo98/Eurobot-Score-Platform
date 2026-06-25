@@ -113,7 +113,7 @@ function Round({ round_info }) {
 					<Button
 						variant='outline-primary'
 						size='sm'
-						className='ms-auto'
+						className='ms-auto me-2'
 						onClick={() => showRoundMatches(round_info.round_id)}
 					>
 						Show planned matches
@@ -121,7 +121,7 @@ function Round({ round_info }) {
 					<Button
 						variant='outline-primary'
 						size='sm'
-						className='me-2'
+						className=''
 						onClick={() => roundResults(round_info.round_id)}
 					>
 						Show
