@@ -3,10 +3,10 @@ import { useEffect, useState } from 'react';
 import { useInfo } from '../../../context/infoContext';
 
 const teamPerPage = 6;
+const SUFFLE_DELAY = 2;
 
 function ShowRoundMatches({ matchList }) {
     const colors = useInfo().colors;
-    const [timer, setTimer] = useState(0);
     const [diplayIndex, setDisplayIndex] = useState(0);
     const [diplayedMatches, setDisplayedMatches] = useState([]);
     const centerMatches = diplayedMatches.length > 0 && diplayedMatches.length < teamPerPage;
@@ -25,25 +25,14 @@ function ShowRoundMatches({ matchList }) {
     useEffect(() => {
         // Define the time-based callback using setInterval
         const intervalId = setInterval(() => {
-            if (timer > 0 && parseInt((timer - 1) / 2) === (timer - 1) / 2) {
-                if (diplayIndex < matchList.length) {
-                    if (diplayIndex + teamPerPage < matchList.length) {
-                        setDisplayedMatches(
-                            matchList.slice(diplayIndex, diplayIndex + teamPerPage)
-                        );
-                    } else {
-                        setDisplayedMatches(matchList.slice(diplayIndex));
-                    }
-                    setDisplayIndex(diplayIndex + teamPerPage);
-                }
-            }
-            setTimer(timer + 1);
-        }, 1000);
+            if (diplayIndex + teamPerPage < matchList.length)
+                setDisplayIndex(diplayIndex + teamPerPage);
+        }, SUFFLE_DELAY*1000);
 
         return () => {
             clearInterval(intervalId);
         };
-    }, [timer, diplayIndex, matchList]);
+    }, [diplayIndex, matchList]);
 
     return (
         <div className='matches-overlay'>

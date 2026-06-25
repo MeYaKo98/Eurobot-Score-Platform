@@ -12,7 +12,10 @@ initWebSocket(server);
 //Adding the required middleware
 app.use(
 	cors({
-		origin: process.env.CLIENT_URL,
+		origin: [
+			process.env.CLIENT_URL,
+			/^https?:\/\/(?:localhost|127\.0\.0\.1|\[::1\])(?::\d+)?$/,
+		],
 		credentials: true,
 	})
 );

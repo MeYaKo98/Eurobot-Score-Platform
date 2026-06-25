@@ -2,11 +2,13 @@ import { useInfo } from '../../../context/infoContext';
 import './matchScore.css';
 
 function MatchScore({ matchResults }) {
-	const colors = useInfo().colors;
-	const taskList = useInfo().tasks;
-	const notEstimatedTaskList = useInfo().notEstimatedTaskList;
-	const isEstimationActive = useInfo().isEstimationActive;
-	const year = useInfo().year;
+	const {
+		colors = {},
+		tasks: taskList = [],
+		notEstimatedTasks: notEstimatedTaskList = [],
+		isEstimationActive = false,
+		year = new Date().getFullYear(),
+	} = useInfo() || {};
 
 	return (
 		<div className='score'>
