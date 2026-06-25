@@ -1,5 +1,7 @@
 #build image
 FROM node:18 AS builder
+ARG REACT_APP_DISPLAY_VERSION=v2
+ENV REACT_APP_DISPLAY_VERSION=${REACT_APP_DISPLAY_VERSION}
 WORKDIR /app
 COPY package*.json ./
 RUN npm install

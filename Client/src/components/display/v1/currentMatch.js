@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useInfo } from '../../context/infoContext';
+import { useInfo } from '../../../context/infoContext';
 import './currentMatch.css';
 
 const MATCH_DURATION = 100;

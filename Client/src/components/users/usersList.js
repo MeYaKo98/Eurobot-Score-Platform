@@ -1,5 +1,4 @@
 import { ListGroup, ListGroupItem } from 'react-bootstrap';
-import { Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { useAuth } from '../../context/userContext';
@@ -10,7 +9,7 @@ function UserList({ usersList, deleteUser }) {
 		<ListGroup className='my-3'>
 			{usersList.map(
 				(user, index) =>
-					user.username != currentUser.username && (
+					user.username !== currentUser.username && (
 						<ListGroupItem
 							className='d-flex align-items-center justify-content-between'
 							key={user.username}

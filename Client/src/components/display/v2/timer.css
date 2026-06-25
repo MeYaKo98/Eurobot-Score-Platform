@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Chivo+Mono:ital,wght@1,900&display=swap');
+
+.timer-display {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    overflow: hidden;
+}
+
+.huge-clock {
+    font-family: 'Chivo Mono', monospace;
+    font-size: 40vh;
+    color: white;
+    font-weight: bold;
+    text-shadow: 0 15px 40px rgba(0, 0, 0, 0.9), 0 0 60px rgba(0, 0, 0, 0.7);
+    animation: fade 1.5s ease-out forwards;
+}
+
+.huge-clock.pulse-warning {
+    color: #ff4d4d;
+    text-shadow: 0 10px 40px rgba(255, 0, 0, 0.9), 0 0 60px rgba(255, 0, 0, 0.6);
+    animation: urgentPulse 1s infinite;
+}
+
+@keyframes urgentPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes fade {
+    0% { opacity: 0; transform: translateY(-5vh); }
+    100% { opacity: 1; transform: translateY(0); }
+}

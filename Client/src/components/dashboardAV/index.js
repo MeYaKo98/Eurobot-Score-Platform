@@ -39,7 +39,7 @@ function Index() {
 
 	return (
 		<Container>
-			<Form className='sticky-top my-3 d-flex align-items-center flex-wrap'>
+			<Form className='sticky-top my-3 d-flex align-items-center flex-nowrap'>
 				<Form.Group className="me-3 d-flex align-items-center">
 					<Form.Label className="mb-0 me-2">Minutes:</Form.Label>
 					<Form.Control type="number" value={minutes} onChange={(e) => setMinutes(parseInt(e.target.value))}/>

@@ -1,0 +1,92 @@
+.leaderboard-overlay {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.leaderboard-card {
+    width: 80vw;
+    height: 90vh;
+    background-color: rgba(15, 15, 20, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
+    display: flex;
+    flex-direction: column;
+    padding: 3vh 3vw;
+    animation: fadeScale 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeScale {
+    0% { opacity: 0; transform: scale(0.95); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+.lb-header {
+    text-align: center;
+    font-size: 5vh;
+    font-weight: bold;
+    color: white;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
+    margin-bottom: 3vh;
+}
+
+.lb-list {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1vh;
+    overflow: hidden;
+}
+
+.lb-row {
+    flex: 0 1 10vh;
+    min-height: 0;
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 12px;
+    padding: 0 2vw;
+    animation: slideInUp 0.4s ease-out forwards;
+    opacity: 0;
+}
+
+.lb-row:nth-child(even) {
+    background: rgba(255, 255, 255, 0.06);
+}
+
+@keyframes slideInUp {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.lb-rank {
+    font-size: 3.5vh;
+    font-weight: bold;
+    color: rgba(255,255,255,0.5);
+    width: 8vw;
+}
+
+.lb-team {
+    flex: 1;
+    font-size: 3.5vh;
+    font-weight: bold;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+}
+
+.lb-score {
+    font-size: 4vh;
+    font-weight: bold;
+    color: white;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+    min-width: 10vw;
+    text-align: right;
+}

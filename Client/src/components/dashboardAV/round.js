@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import MatchAPI from '../../services/match';
 import { ListGroup, ListGroupItem, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStop, faPlay, faRepeat } from '@fortawesome/free-solid-svg-icons';
+import { faStop, faPlay } from '@fortawesome/free-solid-svg-icons';
 
 import io from 'socket.io-client';
 import server from '../../services/server';
@@ -49,7 +49,7 @@ function Round({ round_info }) {
 		MatchAPI.get(round_info.round_id)
 			.then((data) => setMatchList(data))
 			.catch((error) => console.error('Error fetching data:', error));
-	}, []);
+	}, [round_info.round_id]);
 
 	return (
 		<>
@@ -73,7 +73,7 @@ function Round({ round_info }) {
 							className='ms-auto me-2'
 							onClick={() => showMatchBanner(singleMatch)}
 						>
-							Show match banner
+							Banner
 						</Button>
 						<Button
 							variant='outline-primary'
@@ -94,37 +94,30 @@ function Round({ round_info }) {
 						<Button
 							variant='outline-danger'
 							size='sm'
-							className='me-2'
+							className=''
 							onClick={() => stopMatch(singleMatch)}
 						>
 							<FontAwesomeIcon icon={faStop} />
 						</Button>
-						<Button
-							variant='outline-warning'
-							size='sm'
-							className=''
-						>
-							<FontAwesomeIcon icon={faRepeat} />
-						</Button>
 					</ListGroupItem>
 				))}
 				<ListGroupItem className='d-flex align-items-center pe-2'>
-					Round Results
+					Round
 					<Button
 						variant='outline-primary'
 						size='sm'
-						className='ms-auto'
+						className='ms-auto me-2'
 						onClick={() => showRoundMatches(round_info.round_id)}
 					>
-						Show planned matches
+						Matches
 					</Button>
 					<Button
 						variant='outline-primary'
 						size='sm'
-						className='me-2'
+						className=''
 						onClick={() => roundResults(round_info.round_id)}
 					>
-						Show
+						Results
 					</Button>
 				</ListGroupItem>
 			</ListGroup>

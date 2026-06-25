@@ -50,7 +50,7 @@ export function UserProvider({ children }) {
 				username: null,
 			});
 		}
-	}, [cookies]);
+	}, [cookies, setCookie]);
 
 	return <userContext.Provider value={user}>{children}</userContext.Provider>;
 }

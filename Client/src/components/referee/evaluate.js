@@ -35,7 +35,7 @@ function Evaluate() {
 			.catch((error) => {
 				console.error('Error fetching data:', error);
 			});
-	}, []);
+	}, [score_info.match_id, score_info.round_id, score_info.referee_id]);
 
 	const submitScore = (e) => {
 		//prevent default behaviour (refresh)

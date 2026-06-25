@@ -8,7 +8,7 @@ import eurobotLogo from '../assets/eurobot_tn.svg';
 function Home({ linkList }) {
 	//display on role related links
 	const user = useAuth();
-	const [cookies, setCookie] = useCookies(['authToken']);
+	const [, setCookie] = useCookies(['authToken']);
 
 	return (
 		<Container

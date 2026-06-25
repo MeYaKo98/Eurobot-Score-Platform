@@ -1,13 +1,13 @@
 import './roundResults.css';
 
 import { useEffect, useState } from 'react';
-import { useInfo } from '../../context/infoContext';
+import { useInfo } from '../../../context/infoContext';
 
 const teamPerPage = 6;
+const SUFFLE_DELAY = 2;
 
 function ShowRoundMatches({ matchList }) {
     const colors = useInfo().colors;
-    const [timer, setTimer] = useState(0);
     const [diplayIndex, setDisplayIndex] = useState(0);
     const [diplayedMatches, setDisplayedMatches] = useState([]);
 
@@ -19,31 +19,22 @@ function ShowRoundMatches({ matchList }) {
         } else {
             setDisplayedMatches(matchList.slice(diplayIndex));
         }
-    }, [matchList]);
+    }, [diplayIndex, matchList]);
 
     //update the diplay every 2 seconds
     useEffect(() => {
         // Define the time-based callback using setInterval
         const intervalId = setInterval(() => {
-            if (timer > 0 && parseInt((timer - 1) / 2) === (timer - 1) / 2)
-                if (diplayIndex < matchList.length) {
-                    if (diplayIndex + teamPerPage < matchList.length) {
-                        setDisplayedMatches(
-                            matchList.slice(diplayIndex, diplayIndex + teamPerPage)
-                        );
-                    } else {
-                        setDisplayedMatches(matchList.slice(diplayIndex));
-                    }
-                    setDisplayIndex(diplayIndex + teamPerPage);
-                }
-            setTimer(timer + 1);
+            if (diplayIndex + teamPerPage< matchList.length) {
+                setDisplayIndex(diplayIndex + teamPerPage);
+            }
             console.log(diplayIndex, matchList.length);
-        }, 1000);
+        }, SUFFLE_DELAY*1000);
 
         return () => {
             clearInterval(intervalId);
         };
-    }, [timer]);
+    }, [diplayIndex, matchList]);
 
     return (
         <div className='roundDisplay'>

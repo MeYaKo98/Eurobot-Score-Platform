@@ -1,14 +1,15 @@
-import { useInfo } from '../../context/infoContext';
+import { useInfo } from '../../../context/infoContext';
 import './finalRoundResults.css';
 
 function FinalRoundResults({ finalRoundResults }) {
 	const colors = useInfo().colors;
+    const year = useInfo().year;
 
 	return (
 		<div className='finalDisplay'>
 			<div className='background fade'>
 				<div className='header'>
-					{finalRoundResults && finalRoundResults[0].round_name} Eurobot 2026
+					{finalRoundResults && finalRoundResults[0].round_name} Eurobot {year}
 				</div>
 				<div className='scoreTable'>
 					<table className='table'>

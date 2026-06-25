@@ -12,7 +12,7 @@ function Round({ round_info }) {
 		MatchAPI.get(round_info.round_id)
 			.then((data) => setMatchList(data))
 			.catch((error) => console.error('Error fetching data:', error));
-	}, []);
+	}, [round_info.round_id]);
 	return (
 		<>
 			<h6

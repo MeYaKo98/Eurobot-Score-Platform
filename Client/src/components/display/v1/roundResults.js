@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
+import { useInfo } from '../../../context/infoContext';
 import './roundResults.css';
 
 const teamPerPage = 6;
 const SUFFLE_DELAY = 2;
 
 function RoundResults({ roundResults }) {
-	const [timer, setTimer] = useState(0);
+	const year = useInfo().year;
 	const [diplayedTeams, setDisplayedTeams] = useState([]);
 	const [diplayIndex, setDisplayIndex] = useState(0);
 
@@ -18,36 +19,27 @@ function RoundResults({ roundResults }) {
 		} else {
 			setDisplayedTeams(roundResults.slice(diplayIndex));
 		}
-	}, []);
+	}, [diplayIndex, roundResults]);
 
 	//update the diplay every 2 seconds
 	useEffect(() => {
 		// Define the time-based callback using setInterval
 		const intervalId = setInterval(() => {
-			if (timer > 0 && parseInt((timer - 1) / 2) === (timer - 1) / 2)
-				if (diplayIndex < roundResults.length) {
-					if (diplayIndex + teamPerPage < roundResults.length) {
-						setDisplayedTeams(
-							roundResults.slice(diplayIndex, diplayIndex + teamPerPage)
-						);
-					} else {
-						setDisplayedTeams(roundResults.slice(diplayIndex));
-					}
-					setDisplayIndex(diplayIndex + teamPerPage);
-				}
-			setTimer(timer + 1);
+			if (diplayIndex+teamPerPage < roundResults.length) {
+				setDisplayIndex(diplayIndex + teamPerPage);
+            }
 			console.log(diplayIndex, roundResults.length);
-		}, 1000);
+		}, SUFFLE_DELAY*1000);
 
 		return () => {
 			clearInterval(intervalId);
 		};
-	}, [timer]);
+	}, [diplayIndex, roundResults]);
 
 	return (
 		<div className='roundDisplay'>
 			<div className='background fade'>
-				<div className='header'>Cumulative Score Eurobot 2026</div>
+				<div className='header'>Cumulative Score Eurobot {year}</div>
 				<div className='scoreTable'>
 					<table className='table'>
 						{diplayedTeams.map((team, index) => (

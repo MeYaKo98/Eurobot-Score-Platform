@@ -1,9 +1,4 @@
 //Here we define the principal colors for each team
-/*primaryColors = {
-	team1: '#CBA846',
-	team2: '#477792',
-};*/
-
 primaryColors = {
 	team1: '#f7b500',
 	team2: '#005b8c',
@@ -52,12 +47,15 @@ notEstimatedTaskList = [];
 
 const isEstimationActive = 0;
 
+const year = 2026;
+
 //Here we define the function that calculate the estimation score bonus
 function estimationBonus(total, estimation) {
 	return Math.min(total, Math.ceil(20 - Math.abs(total - estimation) / 2));
 }
 
 module.exports = {
+    year,
 	primaryColors,
 	taskList,
 	notEstimatedTaskList,
