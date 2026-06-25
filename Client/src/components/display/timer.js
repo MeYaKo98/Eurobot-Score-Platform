@@ -1,17 +1,15 @@
 import { useEffect, useState } from 'react';
-import './roundResults.css';
+import './timer.css';
 
 function Timer({ timer }) {
     const [active, setActive] = useState(false);
-    const [time, setTime] = useState(timer); // single source of truth
+    const [time, setTime] = useState(timer);
 
-    // Initialize timer
     useEffect(() => {
         setTime(timer);
         setActive(true);
     }, [timer]);
 
-    // Interval logic
     useEffect(() => {
         if (!active) return;
 
@@ -31,13 +29,12 @@ function Timer({ timer }) {
 
     const minutes = Math.floor(time / 60);
     const seconds = time % 60;
+    const isWarning = time > 0 && time <= 10;
 
     return (
-        <div className='roundDisplay'>
-            <div className='background fade'>
-                <div style={{ color: "white", height: "100vh", display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '10rem' }}>
-                    {minutes}:{seconds.toString().padStart(2, '0')}
-                </div>
+        <div className='timer-display'>
+            <div className={`huge-clock ${isWarning ? 'pulse-warning' : ''}`}>
+                {minutes}:{seconds.toString().padStart(2, '0')}
             </div>
         </div>
     );
