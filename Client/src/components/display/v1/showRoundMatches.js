@@ -19,7 +19,7 @@ function ShowRoundMatches({ matchList }) {
         } else {
             setDisplayedMatches(matchList.slice(diplayIndex));
         }
-    }, [matchList]);
+    }, [diplayIndex, matchList]);
 
     //update the diplay every 2 seconds
     useEffect(() => {
@@ -43,7 +43,7 @@ function ShowRoundMatches({ matchList }) {
         return () => {
             clearInterval(intervalId);
         };
-    }, [timer]);
+    }, [timer, diplayIndex, matchList]);
 
     return (
         <div className='roundDisplay'>

@@ -1,5 +1,5 @@
 import Modal from 'react-bootstrap/Modal';
-import { Button, Form, FloatingLabel, Alert } from 'react-bootstrap';
+import { Button, Form, Alert } from 'react-bootstrap';
 import { useState } from 'react';
 import UserAPI from '../../services/users';
 

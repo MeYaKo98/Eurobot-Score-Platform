@@ -10,7 +10,7 @@ import eurobotLogo from '../assets/eurobot_tn.svg';
 
 function Login() {
 	const user = useAuth();
-	const [cookies, setCookie] = useCookies(['authToken']);
+	const [, setCookie] = useCookies(['authToken']);
 	const navigate = useNavigate();
 	const location = useLocation();
 	const from = location.state?.from?.pathname || '/';
@@ -20,7 +20,7 @@ function Login() {
 
 	useEffect(() => {
 		if (user.logged) navigate(from, { replace: true });
-	}, [user]);
+	}, [user.logged, from, navigate]);
 
 	const login = async (e) => {
 		e.preventDefault();

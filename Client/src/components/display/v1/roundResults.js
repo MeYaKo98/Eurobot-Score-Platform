@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import './roundResults.css';
 
 const teamPerPage = 6;
-const SUFFLE_DELAY = 2;
 
 function RoundResults({ roundResults }) {
 	const [timer, setTimer] = useState(0);
@@ -18,7 +17,7 @@ function RoundResults({ roundResults }) {
 		} else {
 			setDisplayedTeams(roundResults.slice(diplayIndex));
 		}
-	}, []);
+	}, [diplayIndex, roundResults]);
 
 	//update the diplay every 2 seconds
 	useEffect(() => {
@@ -42,7 +41,7 @@ function RoundResults({ roundResults }) {
 		return () => {
 			clearInterval(intervalId);
 		};
-	}, [timer]);
+	}, [timer, diplayIndex, roundResults]);
 
 	return (
 		<div className='roundDisplay'>
