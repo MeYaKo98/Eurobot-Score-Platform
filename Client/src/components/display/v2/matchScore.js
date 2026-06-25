@@ -2,15 +2,12 @@ import { useInfo } from '../../../context/infoContext';
 import './matchScore.css';
 
 function MatchScore({ matchResults }) {
-	const colors = useInfo().colors;
-	const taskList = useInfo().tasks;
-	const notEstimatedTaskList = useInfo().notEstimatedTasks;
-	const isEstimationActive = useInfo().isEstimationActive;
+	const { year, colors, tasks: taskList, notEstimatedTasks: notEstimatedTaskList, isEstimationActive } = useInfo();
 
 	return (
 		<div className='match-score-overlay'>
 			<div className='match-score-card'>
-				<div className='ms-header'>{matchResults.round_name} Eurobot 2026</div>
+				<div className='ms-header'>{matchResults.round_name} Eurobot {year}</div>
 
 				<div className='ms-content'>
 					<div className='ms-teams-header'>

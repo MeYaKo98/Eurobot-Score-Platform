@@ -16,6 +16,8 @@ export function InfoProvider({ children }) {
 		colors: {},
 		tasks: [],
 		notEstimatedTasks: [],
+		isEstimationActive: false,
+		year: new Date().getFullYear(),
 	});
 
 	//collect the info data on creation
@@ -28,6 +30,7 @@ export function InfoProvider({ children }) {
 					tasks: response.taskList,
 					notEstimatedTasks: response.notEstimatedTaskList,
 					isEstimationActive: response.isEstimationActive,
+					year: response.year || new Date().getFullYear(),
 				};
 				setInfo(combinedData);
 			})

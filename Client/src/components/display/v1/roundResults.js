@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
+import { useInfo } from '../../../context/infoContext';
 import './roundResults.css';
 
 const teamPerPage = 6;
 
 function RoundResults({ roundResults }) {
+	const year = useInfo().year;
 	const [timer, setTimer] = useState(0);
 	const [diplayedTeams, setDisplayedTeams] = useState([]);
 	const [diplayIndex, setDisplayIndex] = useState(0);
@@ -46,7 +48,7 @@ function RoundResults({ roundResults }) {
 	return (
 		<div className='roundDisplay'>
 			<div className='background fade'>
-				<div className='header'>Cumulative Score Eurobot 2026</div>
+				<div className='header'>Cumulative Score Eurobot {year}</div>
 				<div className='scoreTable'>
 					<table className='table'>
 						{diplayedTeams.map((team, index) => (

@@ -4,13 +4,14 @@ import './matchScore.css';
 function MatchScore({ matchResults }) {
 	const colors = useInfo().colors;
 	const taskList = useInfo().tasks;
-	const notEstimatedTaskList = useInfo().notEstimatedTasks;
-	const isEstimationActive = useInfo().isEstimationActive
+	const notEstimatedTaskList = useInfo().notEstimatedTaskList;
+	const isEstimationActive = useInfo().isEstimationActive;
+	const year = useInfo().year;
 
 	return (
 		<div className='score'>
 			<div className='background fade'>
-				<div className='header'>{matchResults.round_name} Eurobot 2026</div>
+				<div className='header'>{matchResults.round_name} Eurobot {year}</div>
 				<div className='teams'>
 					Team 1:
 					<span

@@ -2,14 +2,14 @@ import { useInfo } from '../../../context/infoContext';
 import './finalRoundResults.css';
 
 function FinalRoundResults({ finalRoundResults }) {
-    const colors = useInfo().colors;
+    const { year, colors } = useInfo();
     const shouldCenterRows = finalRoundResults?.length > 0 && finalRoundResults.length < 6;
 
     return (
         <div className='leaderboard-overlay'>
             <div className='leaderboard-card'>
                 <div className='lb-header'>
-                    {finalRoundResults && finalRoundResults[0]?.round_name} Eurobot 2026
+                    {finalRoundResults && finalRoundResults[0]?.round_name} Eurobot {year}
                 </div>
                 <div className={`lb-list${shouldCenterRows ? ' centered' : ''}`}>
                     {finalRoundResults.map((matchResult, index) => (

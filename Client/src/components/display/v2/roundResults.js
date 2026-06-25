@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
+import { useInfo } from '../../../context/infoContext';
 import './roundResults.css';
 
 const teamPerPage = 6;
 const SUFFLE_DELAY = 2;
 
 function RoundResults({ roundResults }) {
+	const year = useInfo().year;
 	const [diplayedTeams, setDisplayedTeams] = useState([]);
 	const [diplayIndex, setDisplayIndex] = useState(0);
 
@@ -43,7 +45,7 @@ function RoundResults({ roundResults }) {
     return (
         <div className='leaderboard-overlay'>
             <div className='leaderboard-card'>
-                <div className='lb-header'>Cumulative Score Eurobot 2026</div>
+                <div className='lb-header'>Cumulative Score Eurobot {year}</div>
                 <div className='lb-list'>
                     {diplayedTeams.map((team, index) => (
                         <div
