@@ -6,3 +6,8 @@ a {
 #root {
 	overflow-x: hidden;
 }
+
+.custom-navbar {
+	background-color: #121212 !important;
+	border-bottom: 1px solid #333;
+}
