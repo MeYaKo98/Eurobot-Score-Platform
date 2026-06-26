@@ -42,7 +42,7 @@ function DetailedScore({ onHide, DetailedScore }) {
 								</td>
 							</tr>
 						))}
-						<tr style={{ borderTopColor: '#000000', borderTopWidth: 2 }}>
+						<tr style={{ borderTopColor: '#d0d0d0', borderTopWidth: 2 }}>
 							<td className='align-middle'>Sub Total</td>
 							<td className='text-center align-middle'>
 								{DetailedScore?.score1?.total
@@ -100,7 +100,7 @@ function DetailedScore({ onHide, DetailedScore }) {
 							<tr
 								style={
 									index === 0
-										? { borderTopColor: '#000000', borderTopWidth: 2 }
+										? { borderTopColor: '#d0d0d0', borderTopWidth: 2 }
 										: {}
 								}
 								key={`notEstimatedTask_${index}`}
@@ -118,7 +118,7 @@ function DetailedScore({ onHide, DetailedScore }) {
 								</td>
 							</tr>
 						))}
-						<tr style={{ borderTopColor: '#000000', borderTopWidth: 2 }}>
+						<tr style={{ borderTopColor: '#d0d0d0', borderTopWidth: 2 }}>
 							<td className='align-middle'>Total</td>
 							<td className='text-center align-middle'>
 								{DetailedScore?.score1?.finalTotal

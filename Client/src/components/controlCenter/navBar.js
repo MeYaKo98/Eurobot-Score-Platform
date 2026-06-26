@@ -2,6 +2,7 @@ import Container from 'react-bootstrap/Container';
 import { NavLink } from 'react-router-dom';
 
 import { Nav, Navbar } from 'react-bootstrap';
+import eurobotLogo from '../../assets/eurobot_tn.svg';
 
 function NavigationBar() {
 	const navLinks = [
@@ -14,15 +15,31 @@ function NavigationBar() {
 			bg='dark'
 			data-bs-theme='dark'
 			expand='lg'
-			className='mb-3'
+			className='mb-3 custom-navbar'
 		>
 			<Container>
-				<Navbar.Brand
-					as={NavLink}
-					to={''}
-				>
-					Control Center
-				</Navbar.Brand>
+				<div className="d-flex align-items-center">
+					<Navbar.Brand
+						as={NavLink}
+						to={'/'}
+						className="me-3"
+					>
+						<img
+							src={eurobotLogo}
+							width="30"
+							height="30"
+							className="d-inline-block align-top"
+							alt="Eurobot Logo"
+						/>
+					</Navbar.Brand>
+					<Navbar.Brand
+						as={NavLink}
+						to={''}
+						className="mb-0"
+					>
+						Control Center
+					</Navbar.Brand>
+				</div>
 				<Navbar.Toggle aria-controls='basic-navbar-nav' />
 				<Navbar.Collapse id='basic-navbar-nav'>
 					<Nav className='ms-auto'>

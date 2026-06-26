@@ -2,6 +2,7 @@ import Container from 'react-bootstrap/Container';
 import { useNavigate, useParams, NavLink } from 'react-router-dom';
 
 import { ButtonGroup, Navbar, ToggleButton } from 'react-bootstrap';
+import eurobotLogo from '../../assets/eurobot_tn.svg';
 
 import { useInfo } from '../../context/infoContext';
 
@@ -14,19 +15,36 @@ function NavigationBar() {
 		{ linkContent: 'Team 1', link: '1', color: colors.team1 },
 		{ linkContent: 'Team 2', link: '2', color: colors.team2 },
 	];
+    
 	return (
 		<Navbar
 			bg='dark'
 			data-bs-theme='dark'
-			className='mb-3'
+			className='mb-3 custom-navbar'
 		>
 			<Container>
-				<Navbar.Brand
-					as={NavLink}
-					to={''}
-				>
-					Referee Center
-				</Navbar.Brand>
+				<div className="d-flex align-items-center">
+					<Navbar.Brand
+						as={NavLink}
+						to={'/'}
+						className="me-3"
+					>
+						<img
+							src={eurobotLogo}
+							width="30"
+							height="30"
+							className="d-inline-block align-top"
+							alt="Eurobot Logo"
+						/>
+					</Navbar.Brand>
+					<Navbar.Brand
+						as={NavLink}
+						to={''}
+						className="mb-0"
+					>
+						Referee Center
+					</Navbar.Brand>
+				</div>
 				{link.split('/').length <= 1 && (
 					<ButtonGroup className='ms-auto'>
 						{navLinks.map((navLink) => (
